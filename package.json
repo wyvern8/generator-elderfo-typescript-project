@@ -8,7 +8,9 @@
     "email": "cgetsfred@gmail.com",
     "url": "http://www.elderfo.com"
   },
-  "files": ["generators"],
+  "files": [
+    "generators"
+  ],
   "main": "generators/index.js",
   "keywords": [
     "typescript",
@@ -39,26 +41,37 @@
   "dependencies": {
     "chalk": "^2.1.0",
     "yeoman-generator": "^2.0.1",
-    "yosay": "^2.0.1"
+    "yosay": "^2.0.1",
+    "snyk": "^1.316.1"
   },
   "jest": {
     "testEnvironment": "node"
   },
   "scripts": {
-    "prepublish": "nsp check",
+    "prepublish": "yarn run snyk-protect && nsp check",
     "pretest": "eslint .",
     "precommit": "lint-staged",
     "test": "jest",
     "ci": "jest --coverage",
-    "semantic-release":
-      "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "snyk-protect": "snyk protect"
   },
   "lint-staged": {
-    "*.js": ["eslint --fix", "git add", "jest --bail --findRelatedTests"],
-    "*.json": ["prettier --write", "git add"]
+    "*.js": [
+      "eslint --fix",
+      "git add",
+      "jest --bail --findRelatedTests"
+    ],
+    "*.json": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "eslintConfig": {
-    "extends": ["xo", "prettier"],
+    "extends": [
+      "xo",
+      "prettier"
+    ],
     "env": {
       "jest": true,
       "node": true
@@ -73,8 +86,11 @@
         }
       ]
     },
-    "plugins": ["prettier"]
+    "plugins": [
+      "prettier"
+    ]
   },
   "repository": "elderfo/generator-elderfo-typescript-workspace",
-  "license": "MIT"
+  "license": "MIT",
+  "snyk": true
 }
